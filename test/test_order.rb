@@ -84,7 +84,7 @@ class OrderTest < Minitest::Test
         }]
       }
 
-      stub_request(:get, 'https://www.giftrocket.com/api/v1/orders/').
+      stub_request(:get, 'https://www.giftrocket.com/api/v1/orders').
         with(query: Giftrocket.default_options).
         to_return(
           status: 200,
@@ -156,7 +156,9 @@ class OrderTest < Minitest::Test
 
       data_to_post = {
         funding_source_id: funding_source_id,
-        gifts: gift_data
+        gifts: gift_data,
+        external_id: nil,
+        organization_id: nil
       }
 
       response = {
@@ -191,7 +193,7 @@ class OrderTest < Minitest::Test
         }
       }
 
-      stub_request(:post, "https://www.giftrocket.com/api/v1/orders/").
+      stub_request(:post, "https://www.giftrocket.com/api/v1/orders").
         with(body: data_to_post.merge(Giftrocket.default_options)).
         to_return(
           status: 200,

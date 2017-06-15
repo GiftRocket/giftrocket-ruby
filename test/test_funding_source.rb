@@ -50,7 +50,7 @@ class FundingSourceTest < Minitest::Test
         ]
       }
 
-      stub_request(:get, 'https://www.giftrocket.com/api/v1/funding_sources/').
+      stub_request(:get, 'https://www.giftrocket.com/api/v1/funding_sources').
         with(query: Giftrocket.default_options).
         to_return(
           status: 200,

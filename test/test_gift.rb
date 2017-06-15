@@ -63,7 +63,7 @@ class GiftTest < Minitest::Test
         ]
       }
 
-      stub_request(:get, 'https://www.giftrocket.com/api/v1/gifts/').
+      stub_request(:get, 'https://www.giftrocket.com/api/v1/gifts').
         with(query: Giftrocket.default_options).
         to_return(
           status: 200,
@@ -98,7 +98,7 @@ class GiftTest < Minitest::Test
 
       query = {offset: 2}
 
-      stub_request(:get, 'https://www.giftrocket.com/api/v1/gifts/').
+      stub_request(:get, 'https://www.giftrocket.com/api/v1/gifts').
         with(query: query.merge(Giftrocket.default_options)).
         to_return(
           status: 200,
