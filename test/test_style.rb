@@ -35,7 +35,7 @@ class StyleTest < Minitest::Test
         ]
       }
 
-      stub_request(:get, 'https://www.giftrocket.com/api/v1/styles/').
+      stub_request(:get, 'https://www.giftrocket.com/api/v1/styles').
         with(query: Giftrocket.default_options).
         to_return(
           status: 200,
