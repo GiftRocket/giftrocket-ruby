@@ -1,7 +1,7 @@
 module Giftrocket
   class Gift
 
-    attr_accessor :id, :order_id, :amount, :message, :style_id, :status, :recipient, :sender, :events, :redemption_methods, :raw
+    attr_accessor :id, :order_id, :amount, :catalog, :message, :style_id, :status, :recipient, :sender, :events, :redemption_methods, :raw
 
     def initialize(attributes)
       attributes = attributes.with_indifferent_access
@@ -15,6 +15,7 @@ module Giftrocket
       self.sender = attributes[:sender]
       self.recipient = Giftrocket::User.new(attributes[:recipient])
       self.events = attributes[:events]
+      self.catalog = attributes[:catalog]
       self.redemption_methods = attributes[:redemption_methods]
     end
 
