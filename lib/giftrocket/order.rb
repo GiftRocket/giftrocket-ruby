@@ -15,17 +15,12 @@ module Giftrocket
       self.sender = Giftrocket::User.new(attributes[:sender])
     end
 
-    def self.create!(funding_source_id, gifts, external_id=nil, organization_id=nil)
-      data_to_post = {
-        funding_source_id: funding_source_id,
-        external_id: external_id,
-        organization_id: organization_id,
-        gifts: gifts
-      }.merge(Giftrocket.default_options)
+    def self.create!(data)
+      raise Giftrocket::Error.new("funding_source_id required") if data[:funding_source_id] == nil
 
       response = Giftrocket::Request.post 'orders',
-                                          body: data_to_post.to_json,
-                                          headers: { 'Content-Type' => 'application/json' }
+        body: data.merge(Giftrocket.default_options).to_json,
+        headers: { 'Content-Type' => 'application/json' }
 
       Giftrocket::Order.new(response[:order])
     end

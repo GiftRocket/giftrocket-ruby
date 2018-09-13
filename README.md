@@ -24,12 +24,12 @@ require 'giftrocket'
 
 # Configure with your sandbox / production token.
 Giftrocket.configure do |config|
-  config[:access_token] = 'YOUR_ACCESS_TOKEN_HERE'
+  config[:access_token] = '[YOUR_API_KEY]'
   config[:base_api_uri] = 'https://testflight.giftrocket.com/api/v1/'
 end
 
 funding_sources = Giftrocket::FundingSource.list
-styles = Giftrocket::Style.list
+campaigns = Giftrocket::Campaign.list
 orders = Giftrocket::Order.list # blank at first.
 gifts = Giftrocket::Gift.list # blank at first.
 
@@ -37,31 +37,37 @@ gifts = Giftrocket::Gift.list # blank at first.
 # Generate an order.
 #
 
+# Campaigns are created within the dashboard by team admins.
+# They define the catalog and presentation (style) of your reward.
+# API requests can always override these settings
+# within the specific gift object by specifying the catalog, message, style_id, etc.
+campaign_id = campaigns.first.id
+
 # The funding source you select is how you are charged for the order.
 funding_source_id = funding_sources.first.id
 
 # Optionally pass a unique external_id for each order create call
 # to guarantee that your order is idempotent and not executed multiple times.
-external_id = "MY_UUID_FOR_THIS_ORDER"
+external_id = "[OPTIONAL_EXTERNAL_ID]"
 
 # An array data representing the gifts you'd like to send.
-gifts = [
-  {
-    "amount": 30,
-    "message": "Thanks for your help this year!",
-    "style_id": styles.first.id,
-    "recipient": {
-      "email": "jake@giftrocket.com",
-      "name": "Jake Douglas"
-    },
-    "sender": {
-      "name": "Kapil Kale"
+order_data = {
+  external_id: external_id,
+  funding_source_id: funding_source_id,
+  campaign_id: campaign_id,
+  gifts: [
+    {
+      "amount": 30,
+      "recipient": {
+        "email": "sam@yourdomain.com",
+        "name": "Sam Stevens"
+      }
     }
-  }
-]
+  ]
+}
 
 # Submit the order to GiftRocket.
-order = Giftrocket::Order.create!(funding_source_id, gifts, external_id)
+order = Giftrocket::Order.create!(order_data)
 
 # Retrieve the order and gift.
 Giftrocket::Order.retrieve(order.id)
