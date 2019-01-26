@@ -148,9 +148,9 @@ class OrderTest < Minitest::Test
           "message": "Thank you for your incredible work this year!",
           "recipient": {
             "email": "denise@sales.com",
-            "name": "Denise Miller"
-          },
-          "style_id": "S0Y9RLCM26K2"
+            "name": "Denise Miller",
+            "delivery_method": "EMAIL"
+          }
         }
       ]
 
@@ -201,7 +201,7 @@ class OrderTest < Minitest::Test
           headers: {"Content-Type"=> "application/json"}
         )
 
-      order = Giftrocket::Order.create!(funding_source_id, gift_data)
+      order = Giftrocket::Order.create!(data_to_post)
       assert order.id
     end
 
