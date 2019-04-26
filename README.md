@@ -57,7 +57,7 @@ order_data = {
   campaign_id: campaign_id,
   gifts: [
     {
-      "amount": 30,
+      "amount": 25,
       "recipient": {
         "email": "sam@yourdomain.com",
         "name": "Sam Stevens"
