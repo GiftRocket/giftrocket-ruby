@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['support@giftrocket.com', 'kapil@giftrocket.com']
   spec.files         = Dir['lib/**/*.rb']
 
-  spec.add_runtime_dependency 'activesupport', '>= 3.2', '<= 5.1.1'
+  spec.add_runtime_dependency 'activesupport', '>= 3.2'
   spec.add_runtime_dependency 'httparty', '~> 0.14.0'
   spec.add_runtime_dependency 'jwt', '1.5.6'
 
